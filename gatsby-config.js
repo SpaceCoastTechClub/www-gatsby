@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Space Coast Tech Club`,
+    description: `The SCTC is dedicated to the tech and creative community of the Space Coast of Florida. We provide a free and public Slack and share tech events happening in the area.`,
+    author: `@gilcreque`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -11,6 +11,12 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `./src/data/meetupMeetings`,
       },
     },
     `gatsby-transformer-sharp`,
@@ -29,6 +35,12 @@ module.exports = {
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-transformer-json`,
+      options: {
+        typeName: `Json`, // a fixed string
+      },
+    },
   ],
 }
