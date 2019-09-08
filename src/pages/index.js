@@ -6,6 +6,8 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import MeetupEvent from "../components/meetupEvent"
 
+import "../styles/styles.scss"
+
 export const query = graphql`
   {
     allInternalMeetupEvents(sort: { fields: time, order: ASC }) {
@@ -50,9 +52,13 @@ export default ({ data }) => {
         title="Space Coast Tech Club"
         keywords={[`Google`, `Developers`, `Space`, `Coast`]}
       />
-      {data.allInternalMeetupEvents.edges.map(({ node }, index) => (
-        <MeetupEvent event={node} index={index} />
-      ))}
+      <div class="centered">
+        <section id="series" class="cards">
+          {data.allInternalMeetupEvents.edges.map(({ node }, index) => (
+            <MeetupEvent event={node} index={index} />
+          ))}
+        </section>
+      </div>
     </Layout>
   )
 }

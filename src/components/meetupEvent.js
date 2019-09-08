@@ -4,6 +4,8 @@ import React from "react"
 import Image from "./image"
 import moment from "moment"
 
+import "./meetupEvent.css"
+
 function formatDate(date) {
   return (
     moment(date)
@@ -17,7 +19,7 @@ function formatDate(date) {
 }
 
 const MeetupEvent = ({ event, index }) => (
-  <article key={index}>
+  <article key={index} class="card">
     <img src={event.photo_url} />
     <h3>
       <a href={event.event_url}>{event.name}</a>

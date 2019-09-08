@@ -1,0 +1,47 @@
+@import "./_variables.scss";
+
+body {
+  background-color: $darkblue !important;
+  background-image: url("../images/seigaiha.png");
+  background-repeat: repeat;
+}
+#logo {
+  width: 100%;
+}
+
+#title,
+.jumbotron p {
+  text-align: left;
+}
+
+#title {
+  font-family: "Ubuntu Mono", monospace;
+  font-weight: bold;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  font-size: 5vw;
+}
+
+header {
+  background-color: $primary;
+}
+
+main {
+}
+
+footer {
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1 0 500px;
+  box-sizing: border-box;
+  margin: 1rem 0.25em;
+}

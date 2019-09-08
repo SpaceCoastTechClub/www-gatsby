@@ -4,12 +4,7 @@ import React from "react"
 import Image from "../components/image"
 
 const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `#f38630`,
-      marginBottom: `1.45rem`,
-    }}
-  >
+  <header>
     <div
       style={{
         margin: `0 auto`,
@@ -17,10 +12,12 @@ const Header = ({ siteTitle }) => (
         padding: `1.45rem 1.0875rem`,
       }}
     >
-      <div style={{ maxWidth: `300px` }}>
-        <Image />
+      <div style={{ maxWidth: `960px` }}>
+        <Link to="/">
+          <Image />
+        </Link>
       </div>
-      <h1 style={{ margin: 0 }}>
+      <h1 style={{ display: `none` }}>
         <Link
           to="/"
           style={{
