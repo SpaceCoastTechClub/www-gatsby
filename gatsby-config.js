@@ -13,12 +13,12 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `./src/data/meetupMeetings`,
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     path: `./src/data/meetupMeetings`,
+    //   },
+    // },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -31,6 +31,45 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: "gatsby-source-apiserver",
+      options: {
+        // Type prefix of entities from server
+        typePrefix: "internal__",
+
+        // The url, this should be the endpoint you are attempting to pull data from
+        url: `https://api.meetup.com/2/events?fields=group_photo,series&offset=0&format=json&limited_events=False&group_id=8209012,5292112,27505347,30015014,26468962,8099832,3381942,31892636,17108342,1570697,20150455,28714554,18448785,30790098,31284731,32240720,30816774,1728277&photo-host=secure&page=500&order=time&desc=false&status=upcoming`,
+
+        method: "get",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        // Name of the data to be downloaded.  Will show in graphQL or be saved to a file
+        // using this name. i.e. posts.json
+        name: `meetupEvents`,
+
+        // Optional payload key name if your api returns your payload in a different key
+        // Default will use the full response from the http request of the url
+        payloadKey: `results`,
+
+        // Optionally re-source data when it changes and
+        // `gatsby develop` is running.
+        // Requires `ENABLE_GATSBY_REFRESH_ENDPOINT=true`.
+        // See https://www.gatsbyjs.org/docs/environment-variables/#reserved-environment-variables
+        // Default is false
+        enableDevRefresh: true,
+
+        // Optionally override key used to re-source data
+        // when `gatsby develop` is running.
+        // Requires `enableDevRefresh: true`.
+        // See setting directly above this one.
+        // See also https://github.com/gatsbyjs/gatsby/issues/14653
+        // Default is `id`
+        refreshId: `id`,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
