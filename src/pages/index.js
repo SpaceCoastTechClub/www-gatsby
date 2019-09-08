@@ -1,11 +1,10 @@
 import React from "react"
 import { Link } from "gatsby"
 import { graphql } from "gatsby"
-import moment from "moment"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+import MeetupEvent from "../components/meetupEvent"
 
 export const query = graphql`
   {
@@ -42,17 +41,6 @@ export const query = graphql`
     }
   }
 `
-function formatDate(date) {
-  return (
-    moment(date)
-      .local(true)
-      .format("dddd, MMMM Do YYYY") +
-    " at " +
-    moment(date)
-      .local()
-      .format("h:mm a")
-  )
-}
 
 export default ({ data }) => {
   console.log(data)
@@ -63,13 +51,7 @@ export default ({ data }) => {
         keywords={[`Google`, `Developers`, `Space`, `Coast`]}
       />
       {data.allInternalMeetupEvents.edges.map(({ node }, index) => (
-        <article key={index}>
-          <h2>
-            <a href={node.event_url}>{node.name}</a>
-          </h2>
-          <h3>{formatDate(node.time)}</h3>
-          <div dangerouslySetInnerHTML={{ __html: node.description }} />
-        </article>
+        <MeetupEvent event={node} index={index} />
       ))}
     </Layout>
   )
