@@ -10,7 +10,9 @@ import "../styles/styles.scss"
 
 export const query = graphql`
   {
-    allInternalMeetupEvents(sort: { fields: time, order: ASC }) {
+    allInternalMeetupEvents(
+        sort: { fields: time, order: ASC }
+      ) {
       edges {
         node {
           name
@@ -45,7 +47,6 @@ export const query = graphql`
 `
 
 export default ({ data }) => {
-  console.log(data)
   return (
     <Layout>
       <SEO
@@ -54,9 +55,12 @@ export default ({ data }) => {
       />
       <div class="centered">
         <section id="series" class="cards">
-          {data.allInternalMeetupEvents.edges.map(({ node }, index) => (
-            <MeetupEvent event={node} index={index} />
-          ))}
+          {data.allInternalMeetupEvents.edges
+            .filter(node => node.node.name !== null)
+            .filter(node => node.node.series === null)
+            .map(({ node }, index) => (
+              <MeetupEvent event={node} index={index} />
+            ))}
         </section>
       </div>
     </Layout>
