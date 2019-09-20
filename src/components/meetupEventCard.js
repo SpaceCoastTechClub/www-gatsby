@@ -20,12 +20,20 @@ function formatDate(date) {
 
 const MeetupEventCard = ({ event, showDescription }) => (
   <article key={event.id} className="card">
-    {event.photo_url ? <img src={event.photo_url} /> : event.group.group_photo ? <img src={event.group.group_photo.highres_link} /> : ""}
+    {event.photo_url ? (
+      <img src={event.photo_url.replace("global_", "highres_")} />
+    ) : event.group.group_photo ? (
+      <img src={event.group.group_photo.highres_link} />
+    ) : (
+      ""
+    )}
     <h3>
       <a href={event.event_url}>{event.name}</a>
     </h3>
     <h4>{formatDate(event.time)}</h4>
-    {showDescription ? <div dangerouslySetInnerHTML={{ __html: event.description }} /> : null}
+    {showDescription ? (
+      <div dangerouslySetInnerHTML={{ __html: event.description }} />
+    ) : null}
   </article>
 )
 
