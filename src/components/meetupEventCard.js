@@ -4,7 +4,7 @@ import React from "react"
 import Image from "./image"
 import moment from "moment"
 
-import "./meetupEvent.css"
+import "./meetupEventCard.css"
 
 function formatDate(date) {
   return (
@@ -18,15 +18,15 @@ function formatDate(date) {
   )
 }
 
-const MeetupEvent = ({ event, index }) => (
-  <article key={index} class="card">
-    <img src={event.photo_url} />
+const MeetupEventCard = ({ event, showDescription }) => (
+  <article key={event.id} className="card">
+    {event.photo_url ? <img src={event.photo_url} /> : event.group.group_photo ? <img src={event.group.group_photo.highres_link} /> : ""}
     <h3>
       <a href={event.event_url}>{event.name}</a>
     </h3>
     <h4>{formatDate(event.time)}</h4>
-    <div dangerouslySetInnerHTML={{ __html: event.description }} />
+    {showDescription ? <div dangerouslySetInnerHTML={{ __html: event.description }} /> : null}
   </article>
 )
 
-export default MeetupEvent
+export default MeetupEventCard

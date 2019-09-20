@@ -4,7 +4,9 @@ import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import MeetupEvent from "../components/meetupEvent"
+import MeetupEventCard from "../components/meetupEventCard"
+import MeetupEventTable from "../components/meetupEventTable"
+
 
 import "../styles/styles.scss"
 
@@ -15,6 +17,7 @@ export const query = graphql`
       ) {
       edges {
         node {
+          id
           name
           description
           time
@@ -39,6 +42,7 @@ export const query = graphql`
               highres_link
             }
             urlname
+            name
           }
         }
       }
@@ -47,22 +51,41 @@ export const query = graphql`
 `
 
 export default ({ data }) => {
+  let seriesId = [];
+  const series = data.allInternalMeetupEvents.edges
+    .filter(node => node.node.name !== null)
+    .filter(node => node.node.series !== null)
+    .filter(node => {
+      let result = seriesId.includes(node.node.series.alternative_id) ? null : node.node.series.alternative_id;
+      if (result) {
+        seriesId.push(result);
+        return true;
+      } else {
+        return false;
+      }
+    })
+  console.log("series: ", series);
   return (
     <Layout>
       <SEO
         title="Space Coast Tech Club"
         keywords={[`Google`, `Developers`, `Space`, `Coast`]}
       />
-      <div class="centered">
-        <section id="series" class="cards">
-          {data.allInternalMeetupEvents.edges
-            .filter(node => node.node.name !== null)
-            .filter(node => node.node.series === null)
-            .map(({ node }, index) => (
-              <MeetupEvent event={node} index={index} />
-            ))}
-        </section>
-      </div>
+      <section id="mainEvents" className="cards">
+        <h1>Main Events</h1>
+        {data.allInternalMeetupEvents.edges
+          .filter(node => node.node.name !== null)
+          .filter(node => node.node.series === null)
+          .map(({ node }) => (
+            <MeetupEventCard event={node} showDescription={false} />
+          ))}
+      </section>
+      <section id="seriesEvents" className="table">
+        <h1>Series Events</h1>
+        {
+          <MeetupEventTable events={series} />
+        }
+      </section>
     </Layout>
   )
 }
