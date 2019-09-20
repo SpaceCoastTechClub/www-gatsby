@@ -38,7 +38,7 @@ module.exports = {
       resolve: "gatsby-source-apiserver",
       options: {
         // Type prefix of entities from server
-        typePrefix: "internal__",
+        typePrefix: "",
 
         // The url, this should be the endpoint you are attempting to pull data from
         url: `https://api.meetup.com/2/events?fields=group_photo,series&offset=0&format=json&limited_events=False&group_id=8209012,5292112,27505347,30015014,26468962,8099832,3381942,31892636,17108342,1570697,20150455,28714554,18448785,30790098,31284731,32240720,30816774,1728277&photo-host=secure&page=500&order=time&desc=false&status=upcoming`,
@@ -82,5 +82,22 @@ module.exports = {
         typeName: `Json`, // a fixed string
       },
     },
+    {
+      resolve: `gatsby-plugin-remote-images`,
+      options: {
+        nodeType: "meetupEvents",
+        imagePath: "photo_url",
+        name: "eventPhoto",
+        prepareUrl: url => (url ? url.replace("global_", "highres_") : url),
+      },
+    },
+    // {
+    //   resolve: `gatsby-plugin-remote-images`,
+    //   options: {
+    //     nodeType: "meetupEvents",
+    //     imagePath: "group.group_photo.highres_link",
+    //     name: "groupPhoto",
+    //   },
+    // },
   ],
 }

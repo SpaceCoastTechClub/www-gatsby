@@ -7,18 +7,30 @@ import SEO from "../components/seo"
 import MeetupEventCard from "../components/meetupEventCard"
 import MeetupEventTable from "../components/meetupEventTable"
 
-
 import "../styles/styles.scss"
 
 export const query = graphql`
   {
-    allInternalMeetupEvents(
-        sort: { fields: time, order: ASC }
-      ) {
+    allMeetupEvents(sort: { fields: time, order: ASC }) {
       edges {
         node {
           id
           name
+          eventPhoto {
+            id
+            relativePath
+            absolutePath
+            base
+            childImageSharp {
+              fluid(maxWidth: 500, maxHeight: 250) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+          # groupPhoto {
+          #   id
+          #   relativePath
+          # }
           description
           time
           photo_url
@@ -51,40 +63,40 @@ export const query = graphql`
 `
 
 export default ({ data }) => {
-  let seriesId = [];
-  const series = data.allInternalMeetupEvents.edges
+  let seriesId = []
+  const series = data.allMeetupEvents.edges
     .filter(node => node.node.name !== null)
     .filter(node => node.node.series !== null)
     .filter(node => {
-      let result = seriesId.includes(node.node.series.alternative_id) ? null : node.node.series.alternative_id;
+      let result = seriesId.includes(node.node.series.alternative_id)
+        ? null
+        : node.node.series.alternative_id
       if (result) {
-        seriesId.push(result);
-        return true;
+        seriesId.push(result)
+        return true
       } else {
-        return false;
+        return false
       }
     })
-  console.log("series: ", series);
+  console.log("series: ", series)
   return (
     <Layout>
       <SEO
         title="Space Coast Tech Club"
         keywords={[`Google`, `Developers`, `Space`, `Coast`]}
       />
+      <h1>Main Events</h1>
       <section id="mainEvents" className="cards">
-        <h1>Main Events</h1>
-        {data.allInternalMeetupEvents.edges
+        {data.allMeetupEvents.edges
           .filter(node => node.node.name !== null)
           .filter(node => node.node.series === null)
           .map(({ node }) => (
             <MeetupEventCard event={node} showDescription={false} />
           ))}
       </section>
+      <h1>Series Events</h1>
       <section id="seriesEvents" className="table">
-        <h1>Series Events</h1>
-        {
-          <MeetupEventTable events={series} />
-        }
+        {<MeetupEventTable events={series} />}
       </section>
     </Layout>
   )

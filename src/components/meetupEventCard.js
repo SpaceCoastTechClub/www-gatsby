@@ -1,7 +1,7 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-import Image from "./image"
+import Img from "gatsby-image"
 import moment from "moment"
 
 import "./meetupEventCard.css"
@@ -20,10 +20,15 @@ function formatDate(date) {
 
 const MeetupEventCard = ({ event, showDescription }) => (
   <article key={event.id} className="card">
-    {event.photo_url ? (
-      <img src={event.photo_url.replace("global_", "highres_")} />
-    ) : event.group.group_photo ? (
-      <img src={event.group.group_photo.highres_link} />
+    {/* {event.eventPhoto ? (
+      <img src={event.eventPhoto.relativePath} />
+    ) : groupPhoto ? (
+      <img src={event.groupPhoto.relativePath} />
+    ) : (
+      ""
+    )} */}
+    {event.eventPhoto ? (
+      <Img fluid={event.eventPhoto.childImageSharp.fluid} alt="" />
     ) : (
       ""
     )}
