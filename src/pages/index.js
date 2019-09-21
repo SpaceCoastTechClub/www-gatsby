@@ -18,19 +18,20 @@ export const query = graphql`
           name
           eventPhoto {
             id
-            relativePath
-            absolutePath
-            base
             childImageSharp {
-              fluid(maxWidth: 500, maxHeight: 250) {
+              fluid(maxWidth: 1024, toFormat: PNG) {
                 ...GatsbyImageSharpFluid
               }
             }
           }
-          # groupPhoto {
-          #   id
-          #   relativePath
-          # }
+          groupPhoto {
+            id
+            childImageSharp {
+              fluid(maxWidth: 1024, toFormat: PNG) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
           description
           time
           photo_url

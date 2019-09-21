@@ -20,15 +20,10 @@ function formatDate(date) {
 
 const MeetupEventCard = ({ event, showDescription }) => (
   <article key={event.id} className="card">
-    {/* {event.eventPhoto ? (
-      <img src={event.eventPhoto.relativePath} />
-    ) : groupPhoto ? (
-      <img src={event.groupPhoto.relativePath} />
-    ) : (
-      ""
-    )} */}
     {event.eventPhoto ? (
-      <Img fluid={event.eventPhoto.childImageSharp.fluid} alt="" />
+      <Img fluid={event.eventPhoto.childImageSharp.fluid} alt="{event.name}" />
+    ) : event.groupPhoto ? (
+      <Img fluid={event.groupPhoto.childImageSharp.fluid} alt="{event.name}" />
     ) : (
       ""
     )}

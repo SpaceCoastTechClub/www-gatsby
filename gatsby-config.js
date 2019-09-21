@@ -91,13 +91,13 @@ module.exports = {
         prepareUrl: url => (url ? url.replace("global_", "highres_") : url),
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-remote-images`,
-    //   options: {
-    //     nodeType: "meetupEvents",
-    //     imagePath: "group.group_photo.highres_link",
-    //     name: "groupPhoto",
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-remote-images`,
+      options: {
+        nodeType: "meetupEvents",
+        imagePath: "group.group_photo.highres_link",
+        name: "groupPhoto",
+      },
+    },
   ],
 }
