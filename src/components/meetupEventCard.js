@@ -20,13 +20,7 @@ function formatDate(date) {
 
 const MeetupEventCard = ({ event, showDescription }) => (
   <article key={event.id} className="card">
-    {event.eventPhoto ? (
-      <Img fluid={event.eventPhoto.childImageSharp.fluid} alt="{event.name}" />
-    ) : event.groupPhoto ? (
-      <Img fluid={event.groupPhoto.childImageSharp.fluid} alt="{event.name}" />
-    ) : (
-      ""
-    )}
+    <h2>{event.group.name}</h2>
     <h3>
       <a href={event.event_url}>{event.name}</a>
     </h3>
@@ -34,6 +28,13 @@ const MeetupEventCard = ({ event, showDescription }) => (
     {showDescription ? (
       <div dangerouslySetInnerHTML={{ __html: event.description }} />
     ) : null}
+    {event.eventPhoto ? (
+      <Img fluid={event.eventPhoto.childImageSharp.fluid} alt="{event.name}" />
+    ) : event.groupPhoto ? (
+      <Img fluid={event.groupPhoto.childImageSharp.fluid} alt="{event.name}" />
+    ) : (
+      ""
+    )}
   </article>
 )
 

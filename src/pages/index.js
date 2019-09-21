@@ -95,8 +95,8 @@ export default ({ data }) => {
             <MeetupEventCard event={node} showDescription={false} />
           ))}
       </section>
-      <h1>Series Events</h1>
       <section id="seriesEvents" className="table">
+        <h1>Series Events</h1>
         {<MeetupEventTable events={series} />}
       </section>
     </Layout>
