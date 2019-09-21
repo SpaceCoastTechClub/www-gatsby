@@ -19,7 +19,7 @@ export const query = graphql`
           eventPhoto {
             id
             childImageSharp {
-              fluid(maxWidth: 1024, toFormat: PNG) {
+              fluid(maxWidth: 1280, toFormat: PNG) {
                 ...GatsbyImageSharpFluid
               }
             }
@@ -27,7 +27,7 @@ export const query = graphql`
           groupPhoto {
             id
             childImageSharp {
-              fluid(maxWidth: 1024, toFormat: PNG) {
+              fluid(maxWidth: 1280, toFormat: PNG) {
                 ...GatsbyImageSharpFluid
               }
             }

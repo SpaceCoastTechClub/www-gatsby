@@ -45,6 +45,13 @@ footer {
   margin: 1rem 0.25em;
 }
 
+@media screen and (max-width: 480px) {
+  .card {
+    flex: 1 0 320px;
+    margin: 0.25em 0.25em;
+  }
+}
+
 #seriesEvents {
   width: 100%;
   background-color: $darkblue;
