@@ -86,8 +86,8 @@ export default ({ data }) => {
         title="Space Coast Tech Club"
         keywords={[`Google`, `Developers`, `Space`, `Coast`]}
       />
-      <h1>Main Events</h1>
       <section id="mainEvents" className="cards">
+        <h1>Main Events</h1>
         {data.allMeetupEvents.edges
           .filter(node => node.node.name !== null)
           .filter(node => node.node.series === null)

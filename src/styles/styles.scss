@@ -54,7 +54,24 @@ footer {
 
 #seriesEvents {
   width: 100%;
-  background-color: $darkblue;
+  background-color: $primary;
   padding: 1rem;
   margin-top: 2rem;
+}
+
+#seriesEvents h1 {
+  width: 100%;
+  display: flex;
+  flex: 0 0 100%;
+}
+
+#mainEvents {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+/*add "clear" after first child*/
+#mainEvents > h1:nth-child(1) {
+  margin-right: calc(100% - 512px);
 }
