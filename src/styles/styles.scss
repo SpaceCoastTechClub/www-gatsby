@@ -1,5 +1,12 @@
 @import "./_variables.scss";
 
+:root {
+  --font-family-sans-serif: "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-monospace: Ubuntu, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
 body {
   background-color: white !important;
   background-repeat: repeat;
@@ -54,7 +61,7 @@ footer {
 
 #seriesEvents {
   width: 100%;
-  background-color: $primary;
+  background-color: $darkblue;
   padding: 1rem;
   margin-top: 2rem;
 }
@@ -74,4 +81,8 @@ footer {
 /*add "clear" after first child*/
 #mainEvents > h1:nth-child(1) {
   margin-right: calc(100% - 512px);
+}
+
+a {
+  color: black;
 }

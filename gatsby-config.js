@@ -99,5 +99,19 @@ module.exports = {
         name: "groupPhoto",
       },
     },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Ubuntu Mono`,
+            variants: [`700`],
+          },
+          {
+            family: `Roboto`,
+          },
+        ],
+      },
+    },
   ],
 }
