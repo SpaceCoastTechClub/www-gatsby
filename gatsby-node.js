@@ -7,22 +7,46 @@
 // You can delete this file if you're not using it
 var fs = require("fs")
 var text2png = require("text2png")
+var moment = require("moment")
 
-exports.onCreateNode = ({ node, getNode }) => {
+function formatDate(date) {
+  return (
+    moment(date)
+      .local(true)
+      .format("dddd, MMMM Do YYYY") +
+    " at " +
+    moment(date)
+      .local()
+      .format("h:mm a")
+  )
+}
+
+exports.onCreateNode = async ({
+  actions,
+  createNodeId,
+  node,
+  store,
+  cache,
+}) => {
+  const { createNode, createNodeField } = actions
   if (node.internal.type === `meetupEvents`) {
-    const event = node
-    // console.log(`\nEvent: `, event)
+    const cardText =
+      node.group.name + "\n" + node.name + "\n" + formatDate(node.time)
+    imagePath = "src/images/meetup-events/" + node.id + ".png"
     fs.writeFileSync(
-      "src/images/meetup-events/" + node.id + ".png",
-      text2png(node.name, {
-        font: "80px DankMono",
-        localFontPath: "src/fonts/DankMono-Italic.ttf",
-        localFontName: "DankMono",
-        color: "teal",
-        backgroundColor: "linen",
+      imagePath,
+      text2png(cardText, {
+        font: "96px Futura",
+        color: "rebeccapurple",
+        backgroundColor: "white",
         lineSpacing: 10,
         padding: 20,
       })
     )
+    await createNodeField({
+      node,
+      name: `featureImage`,
+      value: { imagePath },
+    })
   }
 }
