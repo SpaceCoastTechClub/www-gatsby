@@ -36,6 +36,9 @@ header {
 }
 
 main {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
 }
 
 footer {
@@ -63,7 +66,6 @@ footer {
   width: 100%;
   background-color: $darkblue;
   padding: 1rem;
-  margin-top: 2rem;
 }
 
 #seriesEvents h1 {
@@ -75,7 +77,6 @@ footer {
 #mainEvents {
   width: 100%;
   padding: 1rem;
-  margin-top: 2rem;
 }
 
 /*add "clear" after first child*/
