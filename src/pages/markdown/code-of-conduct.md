@@ -3,7 +3,7 @@ path: "/coc"
 title: "Code of Conduct"
 ---
 
-## Code of Conduct
+# Code of Conduct
 
 The Space Coast Tech Club Slack Community exists to provide a space for individuals who live in the
 Space Coast region to communicate, interact, share interesting ideas, and support each other in
@@ -28,6 +28,7 @@ of the admins.
 If you are being harassed or offended by a member of the community, notice that someone else is
 being harassed or offended, or have any other concerns, please contact the admins by emailing admin at thisdomain.
 
-### Thanks!
+## Thanks!
+
 The [DC Tech Slack](http://www.dctechslack.com/) was nice enough to
 let us to use their code of conduct.
