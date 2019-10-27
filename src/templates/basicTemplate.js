@@ -1,20 +1,19 @@
-import React from 'react';
-import { graphql } from 'gatsby';
+import React from "react"
+import { graphql } from "gatsby"
+
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 
 export default function BasicTemplate({ data }) {
-  const { markdownRemark } = data;
-  const { html } = markdownRemark;
+  const { markdownRemark } = data
+  const { html, frontmatter } = markdownRemark
 
   return (
-    <div
-      className="container"
-      style={{ padding: '10px' }}
-    >
-      <div
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-    </div>
-  );
+    <Layout>
+      <SEO title={frontmatter.title} />
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    </Layout>
+  )
 }
 
 export const pageQuery = graphql`
@@ -27,4 +26,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`
