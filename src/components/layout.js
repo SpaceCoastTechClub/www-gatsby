@@ -35,6 +35,16 @@ const Layout = ({ children }) => (
           <main>{children}</main>
           <footer>© {new Date().getFullYear()}, Space Coast Tech Club</footer>
         </div>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147453384-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-147453384-1');
+        </script>
       </>
     )}
   />
