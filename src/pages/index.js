@@ -1,12 +1,9 @@
-import React from "react"
-import { Link } from "gatsby"
 import { graphql } from "gatsby"
-
+import React from "react"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
 import MeetupEventCard from "../components/meetupEventCard"
 import MeetupEventTable from "../components/meetupEventTable"
-
+import SEO from "../components/seo"
 import "../styles/styles.scss"
 
 export const query = graphql`
@@ -79,7 +76,6 @@ export default ({ data }) => {
         return false
       }
     })
-  console.log("series: ", series)
   return (
     <Layout>
       <SEO
