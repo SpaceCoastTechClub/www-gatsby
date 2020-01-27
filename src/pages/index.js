@@ -1,12 +1,9 @@
-import React from "react"
-import { Link } from "gatsby"
 import { graphql } from "gatsby"
-
+import React from "react"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
 import MeetupEventCard from "../components/meetupEventCard"
 import MeetupEventTable from "../components/meetupEventTable"
-
+import SEO from "../components/seo"
 import "../styles/styles.scss"
 
 export const query = graphql`
@@ -64,14 +61,30 @@ export const query = graphql`
 `
 
 export default ({ data }) => {
+  const main = data.allMeetupEvents.edges
+    .filter(node => node.node.name !== null)
+    .filter(node => node.node.series === null)
   let seriesId = []
   const series = data.allMeetupEvents.edges
     .filter(node => node.node.name !== null)
     .filter(node => node.node.series !== null)
     .filter(node => {
-      let result = seriesId.includes(node.node.series.alternative_id)
-        ? null
-        : node.node.series.alternative_id
+      let result =
+        seriesId.includes(node.node.series.alternative_id) ||
+        node.node.series.alternative_id === 40406250 ||
+        node.node.series.alternative_id === 42059981 ||
+        node.node.series.alternative_id === 41748365
+          ? null
+          : node.node.series.alternative_id
+      if (
+        (node.node.series.alternative_id === 40406250 ||
+          node.node.series.alternative_id === 42059981 ||
+          node.node.series.alternative_id === 41748365) &&
+        !seriesId.includes(node.node.series.alternative_id)
+      ) {
+        main.push(node)
+        seriesId.push(node.node.series.alternative_id)
+      }
       if (result) {
         seriesId.push(result)
         return true
@@ -79,7 +92,7 @@ export default ({ data }) => {
         return false
       }
     })
-  console.log("series: ", series)
+
   return (
     <Layout>
       <SEO
@@ -88,12 +101,9 @@ export default ({ data }) => {
       />
       <section id="mainEvents" className="cards">
         <h1>Main Events</h1>
-        {data.allMeetupEvents.edges
-          .filter(node => node.node.name !== null)
-          .filter(node => node.node.series === null)
-          .map(({ node }) => (
-            <MeetupEventCard event={node} showDescription={false} />
-          ))}
+        {main.map(({ node }) => (
+          <MeetupEventCard event={node} showDescription={false} />
+        ))}
       </section>
       <section id="seriesEvents" className="table">
         <h1>Series Events</h1>
